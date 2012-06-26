@@ -74,7 +74,6 @@ public class rmixer
 	}
 	catch (final Throwable err)
 	{
-	    err.printStackTrace(System.out);
 	    System.out.println("rmixer - Simple remote interface for the ALSA mixer");
 	    System.out.println();
 	    System.out.println("USAGE:  rmixer OPTIONS [ACTION]");
