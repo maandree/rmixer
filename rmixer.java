@@ -46,7 +46,9 @@ public class rmixer
 	try
 	{   for (int i = 0, n = args.length; i < n; i++)
 		if (args[i].equals("--server"))
+		{   server = true;
 		    prec = 1;
+		}
 		else if (args[i].equals("--client"))
 		{   client = args[++i];
 		    prec = 0;
@@ -67,12 +69,12 @@ public class rmixer
 		    throw new Exception();
 	    if (prec < 0)  throw new Exception();
 	    if (port < 0)  throw new Exception();
-	    if ((client != null) && (prec == 0))  throw new Exception();
+	    if ((client == null) && (prec == 0))  throw new Exception();
 	    if ((action < 0) && (prec == 0))  throw new Exception();
-	    if ((server == false) && (prec == 1))  throw new Exception();
 	}
 	catch (final Throwable err)
 	{
+	    err.printStackTrace(System.out);
 	    System.out.println("rmixer - Simple remote interface for the ALSA mixer");
 	    System.out.println();
 	    System.out.println("USAGE:  rmixer OPTIONS [ACTION]");
@@ -102,7 +104,7 @@ public class rmixer
 	    return;
 	}
 	
-	if (client != null)
+	if (prec == 0)
 	{
 	    System.out.print("(amixer -c 0 -- set PCM) ");
 	    if (action == 0)  System.out.print("3dB+");
