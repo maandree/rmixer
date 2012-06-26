@@ -67,9 +67,9 @@ public class rmixer
 		    throw new Exception();
 	    if (prec < 0)  throw new Exception();
 	    if (port < 0)  throw new Exception();
-	    if ((client != null) && (prec == 1))  throw new Exception();
-	    if ((action < 0) && (prec == 1))  throw new Exception();
-	    if ((server == false) && (prec == 2))  throw new Exception();
+	    if ((client != null) && (prec == 0))  throw new Exception();
+	    if ((action < 0) && (prec == 0))  throw new Exception();
+	    if ((server == false) && (prec == 1))  throw new Exception();
 	}
 	catch (final Throwable err)
 	{
