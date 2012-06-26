@@ -9,7 +9,7 @@
 # Maintainer: Mattias Andrée <maandree@operamail.com>
 pkgname=rmixer-git
 pkgver=20120626
-pkgrel=3
+pkgrel=4
 pkgdesc="Simple remote interface for the ALSA mixer"
 arch=('any')
 url="https://github.com/maandree/rmixer"

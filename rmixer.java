@@ -66,7 +66,9 @@ public class rmixer
 		    prec = 0;
 		}
 		else
+		{   System.err.println("Unrecognized option: " + args[i]);
 		    throw new Exception();
+		}
 	    if (prec < 0)  throw new Exception();
 	    if (port < 0)  throw new Exception();
 	    if ((client == null) && (prec == 0))  throw new Exception();
