@@ -1,12 +1,12 @@
 # Maintainer: Mattias Andrée <maandree@operamail.com>
 pkgname=rmixer
 pkgver=1.0
-pkgrel=2
+pkgrel=3
 pkgdesc="Simple remote interface for the ALSA mixer"
 arch=('any')
 url="https://github.com/maandree/rmixer"
 license=('Public Domain')
-depends=('java-runtime>=7' 'alsa-util')
+depends=('java-runtime>=7' 'alsa-utils')
 makedepends=('java-environment>=7')
 provides=('rmixer')
 conflicts=('rmixer')
