@@ -1,0 +1,143 @@
+\input texinfo   @c -*-texinfo-*-
+
+@c %**start of header
+@setfilename rmixer.info
+@settitle rmixer
+@afourpaper
+@documentencoding UTF-8
+@documentlanguage en
+@finalout
+@c %**end of header
+
+
+@c @defindex op
+@c @synindex op vr
+@c @synindex cp pg
+
+
+@copying
+This manual is for rmixer.
+
+Copyright @copyright{} 2013 Mattias Andrée
+
+@quotation
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.3 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections, with no Front-Cover Texts, and with no Back-Cover
+Texts. A copy of the license is included in the section entitled
+``GNU Free Documentation License''.
+@end quotation
+@end copying
+
+
+@ifnottex
+@node Top
+@top rmixer
+@insertcopying
+@end ifnottex
+
+@titlepage
+@title rmixer
+@subtitle Simple remote interface for the ALSA mixer
+@author Mattias Andrée, maandree@@member.fsf.org
+@page
+@vskip 0pt plus 1filll
+@insertcopying
+@end titlepage
+
+@contents
+
+
+@menu
+* Overview::                        Overview of @command{rmixer}
+* Invoking::                        Invoking @command{rmixer}
+* License of rmixer::               Summary of the license of the program
+* GNU Free Documentation License::  The license of this manual
+* Concept index::                   Concept index
+@end menu
+
+
+
+@node Overview
+@chapter Overview
+@cindex overview
+@cindex description
+
+@command{rmixer} is a simple remote interface for the ALSA mixer.
+You can use it for example by setting up a server daemon on your
+stationary computer and set up some keybinding on your portable
+computer to change the volume on your stationary computer from
+your portable computer.
+
+
+@node Invoking
+@chapter Invoking
+@cindex invoking
+@cindex arguments
+@cindex options
+@cindex executing
+@cindex running
+
+Omitted options and arguments are read from @file{~/.rmixerrc}.
+Last appliced option at conflict takes precidence.
+
+To set up a server run @command{rmier --server --port PORT},
+and to access the server run @command{rmier --client --port PORT ACTION}.
+
+Possible values for @var{ACTION} is:
+
+@table @code
+@item +
+Increase PCM volume by 3dB
+@item -
+Decrease PCM volume by 3dB
+@item 0
+@itemx m
+Set PCM volume to zero.
+@end table
+
+
+
+@node License of rmixer
+@appendix License of rmixer
+
+@flushleft
+           DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+                    Version 2, December 2004
+
+ Copyright (C) 2004  Sam Hocevar <sam@@hocevar.net>
+
+ Everyone is permitted to copy and distribute verbatim or modified
+ copies of this license document, and changing it is allowed as long
+ as the name is changed.
+
+           DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+  TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+
+ 0. You just DO WHAT THE FUCK YOU WANT TO.
+@end flushleft
+
+@c @node GNU General Public License
+@c @appendix GNU General Public License
+@c @include gpl.texinfo
+
+@node GNU Free Documentation License
+@appendix GNU Free Documentation License
+@include fdl.texinfo
+
+@node Concept index
+@appendix Concept index
+@printindex cp
+
+@c @node Concept and program index
+@c @appendix Concept and program index
+@c @printindex pg
+
+@c @node Variable and option index
+@c @appendix Variable and option index
+@c @printindex vr
+
+
+@bye
+
