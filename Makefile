@@ -13,6 +13,7 @@ BIN=/bin
 DATA=/share
 COMMAND=ponymenu
 PKGNAME=ponymenu
+BINCLASS=$(DATA)/misc
 
 PROGRAM=rmixer
 BOOK=rmixer
@@ -21,7 +22,10 @@ BOOKDIR=info/
 
 all: code info
 
-code: rmixer.class
+code: rmixer.class rmixer.install
+rmixer.install: rmixer
+	cp "$<" "$@"
+	sed -i 's:-cp \.:-cp $(PREFIX)$(BINCLASS):g' "$@"
 rmixer.class: rmixer.java
 	javac rmixer.java
 
@@ -63,8 +67,9 @@ install: install-cmd install-license install-info
 
 install-cmd:
 	install -dm755 "$(DESTDIR)$(PREFIX)$(BIN)"
-	install -m755 rmixer "$(DESTDIR)$(PREFIX)$(BIN)/$(COMMAND)"
-	install -m644 rmixer*.class "$(DESTDIR)$(PREFIX)$(BIN)"
+	install -dm755 "$(DESTDIR)$(PREFIX)$(BINCLASS)"
+	install -m755 rmixer.install "$(DESTDIR)$(PREFIX)$(BIN)/$(COMMAND)"
+	install -m644 rmixer*.class "$(DESTDIR)$(PREFIX)$(BINCLASS)"
 
 install-license:
 	install -dm755 "$(DESTDIR)$(LICENSES)/$(PKGNAME)"
@@ -79,13 +84,14 @@ install: all
 
 uninstall:
 	-rm -- "$(DESTDIR)$(PREFIX)$(BIN)/$(COMMAND)"
+	-rm -- "$(DESTDIR)$(PREFIX)$(BINCLASS)/rmixer"*.class
 	-rm -- "$(DESTDIR)$(LICENSES)/$(PKGNAME)/COPYING"
 	-rmdir -- "$(DESTDIR)$(LICENSES)/$(PKGNAME)"
 	-rm -- "$(DESTDIR)$(PREFIX)$(DATA)/info/$(PKGNAME).info.gz"
 
 
 clean:
-	-rm -r *.{t2d,aux,cp,cps,fn,ky,log,pg,pgs,toc,tp,vr,vrs,op,ops,bak,info,pdf,ps,dvi,gz,class} 2>/dev/null
+	-rm -r *.{t2d,aux,cp,cps,fn,ky,log,pg,pgs,toc,tp,vr,vrs,op,ops,bak,info,pdf,ps,dvi,gz,class,install} 2>/dev/null
 
 .PHONY: clean uninstall install
 

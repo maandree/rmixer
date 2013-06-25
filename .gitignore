@@ -5,6 +5,7 @@ bin/
 *~
 \#*\#
 .\#*
+*.install
 *.swp
 *.bak
 *.class
