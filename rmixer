@@ -1,3 +1,2 @@
 #!/bin/sh
-java7 -version >/dev/null 2>/dev/null && java7 -cp /usr/bin rmixer "$@"
-java7 -version >/dev/null 2>/dev/null || java  -cp /usr/bin rmixer "$@"
+java -cp . rmixer "$@"

@@ -23,7 +23,7 @@ all: code info
 
 code: rmixer.class
 rmixer.class: rmixer.java
-	javac7 rmixer.java || javac rmixer.java
+	javac rmixer.java
 
 
 info: $(BOOK).info.gz
