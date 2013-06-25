@@ -14,7 +14,7 @@ DATA=/share
 
 PROGRAM=rmixer
 BOOK=$(PROGRAM)
-BOOKDIR=./
+BOOKDIR=info/
 
 
 all: rmixer.class info
