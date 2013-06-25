@@ -11,14 +11,17 @@
 PREFIX=/usr
 BIN=/bin
 DATA=/share
+COMMAND=ponymenu
+PKGNAME=ponymenu
 
 PROGRAM=rmixer
-BOOK=$(PROGRAM)
+BOOK=rmixer
 BOOKDIR=info/
 
 
-all: rmixer.class info
+all: code info
 
+code: rmixer.class
 rmixer.class: rmixer.java
 	javac7 rmixer.java || javac rmixer.java
 
@@ -56,22 +59,33 @@ dvi.xz: $(BOOK).dvi.xz
 	xz -e9 < "$<" > "$@"
 
 
+install: install-cmd install-license install-info
+
+install-cmd:
+	install -dm755 "$(DESTDIR)$(PREFIX)$(BIN)"
+	install -m755 rmixer "$(DESTDIR)$(PREFIX)$(BIN)/$(COMMAND)"
+	install -m644 rmixer*.class "$(DESTDIR)$(PREFIX)$(BIN)"
+
+install-license:
+	install -dm755 "$(DESTDIR)$(LICENSES)/$(PKGNAME)"
+	install -m644 COPYING "$(DESTDIR)$(LICENSES)/$(PKGNAME)"
+
+install-info: $(BOOK).info.gz
+	install -dm755 "$(DESTDIR)$(PREFIX)$(DATA)/info"
+	install -m644 "$(BOOK).info.gz" "$(DESTDIR)$(PREFIX)$(DATA)/info/$(PKGNAME).info.gz"
+
 install: all
-	mkdir -p "$(PREFIX)$(BIN)"
-	install -m 644 rmixer*.class "${DESTDIR}$(PREFIX)$(BIN)"
-	install -m 755 rmixer "${DESTDIR}$(PREFIX)$(BIN)"
-	install -m 644 COPYING "$(DESTDIR)$(PREFIX)$(DATA)/licenses/$(PROGRAM)"
-	install -m 644 "$(BOOK).info.gz" "$(DESTDIR)$(PREFIX)$(DATA)/info"
 
 
 uninstall:
-	unlink "${DESTDIR}/usr/bin/rmixer"
-	rm -r "$(DESTDIR)$(PREFIX)$(DATA)/licenses/$(PROGRAM)"
-	unlink "$(DESTDIR)$(PREFIX)$(DATA)/info/$(BOOK).info.gz"
+	-rm -- "$(DESTDIR)$(PREFIX)$(BIN)/$(COMMAND)"
+	-rm -- "$(DESTDIR)$(LICENSES)/$(PKGNAME)/COPYING"
+	-rmdir -- "$(DESTDIR)$(LICENSES)/$(PKGNAME)"
+	-rm -- "$(DESTDIR)$(PREFIX)$(DATA)/info/$(PKGNAME).info.gz"
 
 
 clean:
-	rm -r *.{t2d,aux,cp,cps,fn,ky,log,pg,pgs,toc,tp,vr,vrs,op,ops,bak,info,pdf,ps,dvi,gz,class} 2>/dev/null || exit 0
+	-rm -r *.{t2d,aux,cp,cps,fn,ky,log,pg,pgs,toc,tp,vr,vrs,op,ops,bak,info,pdf,ps,dvi,gz,class} 2>/dev/null
 
 .PHONY: clean uninstall install
 
