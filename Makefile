@@ -66,18 +66,18 @@ dvi.xz: $(BOOK).dvi.xz
 install: install-cmd install-license install-info
 
 install-cmd:
-	install -dm755 "$(DESTDIR)$(PREFIX)$(BIN)"
-	install -dm755 "$(DESTDIR)$(PREFIX)$(BINCLASS)"
-	install -m755 rmixer.install "$(DESTDIR)$(PREFIX)$(BIN)/$(COMMAND)"
-	install -m644 rmixer*.class "$(DESTDIR)$(PREFIX)$(BINCLASS)"
+	install -dm755 -- "$(DESTDIR)$(PREFIX)$(BIN)"
+	install -dm755 -- "$(DESTDIR)$(PREFIX)$(BINCLASS)"
+	install -m755 -- rmixer.install "$(DESTDIR)$(PREFIX)$(BIN)/$(COMMAND)"
+	install -m644 -- rmixer*.class "$(DESTDIR)$(PREFIX)$(BINCLASS)"
 
 install-license:
-	install -dm755 "$(DESTDIR)$(LICENSES)/$(PKGNAME)"
-	install -m644 COPYING "$(DESTDIR)$(LICENSES)/$(PKGNAME)"
+	install -dm755 -- "$(DESTDIR)$(LICENSES)/$(PKGNAME)"
+	install -m644 -- COPYING "$(DESTDIR)$(LICENSES)/$(PKGNAME)"
 
 install-info: $(BOOK).info.gz
-	install -dm755 "$(DESTDIR)$(PREFIX)$(DATA)/info"
-	install -m644 "$(BOOK).info.gz" "$(DESTDIR)$(PREFIX)$(DATA)/info/$(PKGNAME).info.gz"
+	install -dm755 -- "$(DESTDIR)$(PREFIX)$(DATA)/info"
+	install -m644 -- "$(BOOK).info.gz" "$(DESTDIR)$(PREFIX)$(DATA)/info/$(PKGNAME).info.gz"
 
 install: all
 
