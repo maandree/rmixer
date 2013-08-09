@@ -1,0 +1,10 @@
+(rmixer
+	(default (arg ACTION) (files -0) (suggest action) (desc 'Volume action to send'))
+	
+	(argumented   (options --client) (complete --client) (arg ADDRESS) (files -0) (desc 'Act as client and connect to the specified server'))
+	(argumented   (options --port)   (complete --port)   (arg PORT)    (files -0) (desc 'Specify port to which to connect or listen on'))
+	(unargumented (options --server) (complete --server)                          (desc 'Act as sevrer'))	   
+	
+	(suggestion action (verbatim + - 0 m))
+)
+

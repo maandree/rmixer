@@ -20,7 +20,7 @@ BOOK=rmixer
 BOOKDIR=info/
 
 
-all: code info
+all: code info shell
 
 code: rmixer.class rmixer.install
 rmixer.install: rmixer
@@ -62,10 +62,20 @@ dvi.xz: $(BOOK).dvi.xz
 %.dvi.xz: %.dvi
 	xz -e9 < "$<" > "$@"
 
+shell:  bash fish zsh
 
-install: install-cmd install-license install-info
+bash: rmixer.bash-completion
+zsh: rmixer.zsh-completion
+fish: rmixer.fish-completion
 
-install-cmd:
+rmixer.%sh-completion: rmixer.auto-completion
+	auto-auto-complete "$*sh" --output "$@" --source "$<"
+
+
+
+install: install-cmd install-license install-info install-shell
+
+install-cmd: code
 	install -dm755 -- "$(DESTDIR)$(PREFIX)$(BIN)"
 	install -dm755 -- "$(DESTDIR)$(PREFIX)$(BINCLASS)"
 	install -m755 -- rmixer.install "$(DESTDIR)$(PREFIX)$(BIN)/$(COMMAND)"
@@ -75,11 +85,21 @@ install-license:
 	install -dm755 -- "$(DESTDIR)$(LICENSES)/$(PKGNAME)"
 	install -m644 -- COPYING "$(DESTDIR)$(LICENSES)/$(PKGNAME)"
 
-install-info: $(BOOK).info.gz
+install-info: info
 	install -dm755 -- "$(DESTDIR)$(PREFIX)$(DATA)/info"
 	install -m644 -- "$(BOOK).info.gz" "$(DESTDIR)$(PREFIX)$(DATA)/info/$(PKGNAME).info.gz"
 
-install: all
+install-shell: install-bash install-fish install-zsh
+
+install-bash: bash
+	install -Dm644 -- rmixer.bash-completion "$(DESTDIR)$(PREFIX)$(DATA)/bash-completion/completions"/rmixer
+
+install-zsh: zsh
+	install -Dm644 -- rmixer.zsh-completion "$(DESTDIR)$(PREFIX)$(DATA)/zsh/site-functions"/_rmixer
+
+install-fish: fish
+	install -Dm644 -- rmixer.fish-completion "$(DESTDIR)$(PREFIX)$(DATA)/fish/completions"/rmixer.fish
+
 
 
 uninstall:
@@ -88,10 +108,14 @@ uninstall:
 	-rm -- "$(DESTDIR)$(LICENSES)/$(PKGNAME)/COPYING"
 	-rmdir -- "$(DESTDIR)$(LICENSES)/$(PKGNAME)"
 	-rm -- "$(DESTDIR)$(PREFIX)$(DATA)/info/$(PKGNAME).info.gz"
+	-rm    -- "$(DESTDIR)$(PREFIX)$(DATA)/bash-completion/completions"/rmixer
+	-rm    -- "$(DESTDIR)$(PREFIX)$(DATA)/zsh/site-functions"/_rmixer
+	-rm    -- "$(DESTDIR)$(PREFIX)$(DATA)/fish/completions"/rmixer.fish
+
 
 
 clean:
-	-rm -r *.{t2d,aux,cp,cps,fn,ky,log,pg,pgs,toc,tp,vr,vrs,op,ops,bak,info,pdf,ps,dvi,gz,class,install} 2>/dev/null
+	-rm -r *.{t2d,aux,cp,cps,fn,ky,log,pg,pgs,toc,tp,vr,vrs,op,ops,bak,info,pdf,ps,dvi,gz,class,install,*sh-completion} 2>/dev/null
 
-.PHONY: clean uninstall install
+.PHONY: clean uninstall install-zsh install-fish install-bash install-shell install-license install-cmd install zsh fish bash shell dvi pdf info code all
 

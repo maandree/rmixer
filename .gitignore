@@ -28,3 +28,4 @@ bin/
 /rmixer.ops
 /rmixer.pgs
 /rmixer.vrs
+/rmixer.*sh-completion
