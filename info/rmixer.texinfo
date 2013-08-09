@@ -83,7 +83,7 @@ Omitted options and arguments are read from @file{~/.rmixerrc}.
 Last appliced option at conflict takes precidence.
 
 To set up a server run @command{rmixer --server --port PORT},
-and to access the server run @command{rmixer --client --port PORT ACTION}.
+and to access the server run @command{rmixer --client ADDRESS --port PORT ACTION}.
 
 Possible values for @var{ACTION} is:
 
