@@ -11,8 +11,8 @@
 PREFIX=/usr
 BIN=/bin
 DATA=/share
-COMMAND=ponymenu
-PKGNAME=ponymenu
+COMMAND=rmixer
+PKGNAME=rmixer
 BINCLASS=$(DATA)/misc
 
 PROGRAM=rmixer
