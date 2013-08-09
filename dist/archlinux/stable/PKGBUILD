@@ -7,7 +7,7 @@ arch=('any')
 url="https://github.com/maandree/rmixer"
 license=('WTFPL')
 depends=('java-runtime>=7' 'alsa-utils')
-makedepends=('java-environment>=7')
+makedepends=('java-environment>=7' 'texinfo' 'gzip' 'auto-auto-complete')
 provides=('rmixer')
 conflicts=('rmixer')
 source=(https://github.com/maandree/rmixer/archive/$pkgver.tar.gz)
