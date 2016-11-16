@@ -1,7 +1,5 @@
 _/
 bin/
-/dist/*/*/*
-!/dist/archlinux/*/PKGBUILD
 *~
 \#*\#
 .\#*
