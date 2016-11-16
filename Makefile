@@ -1,4 +1,4 @@
-# Copyright © 2012, 2013  Mattias Andrée (maandree@member.fsf.org)
+# Copyright © 2012, 2013, 2016  Mattias Andrée (maandree@member.fsf.org)
 # 
 # Copying and distribution of this file, with or without modification,
 # are permitted in any medium without royalty provided the copyright
@@ -14,6 +14,7 @@ DATA=/share
 COMMAND=rmixer
 PKGNAME=rmixer
 BINCLASS=$(DATA)/misc
+LICENSES=$(DATA)/licenses
 
 PROGRAM=rmixer
 BOOK=rmixer
